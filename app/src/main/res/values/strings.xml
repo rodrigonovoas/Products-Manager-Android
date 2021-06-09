@@ -52,6 +52,7 @@
     <string name="operation_add_qty">Quantity</string>
     <string name="operation_add_cost">Cost</string>
     <string name="operation_add_notes">Notes</string>
+    <string name="operation_add_qty_warning_msg">Please, enter an amount for this operation</string>
 
 
     <!-- CONTACT ACTIVITY -->

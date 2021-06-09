@@ -179,7 +179,8 @@
             android:id="@+id/ll_total_cost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:layout_marginBottom="10dp">
 
             <LinearLayout
                 android:layout_width="0dp"
@@ -205,7 +206,9 @@
                     android:layout_height="wrap_content"
                     android:textAlignment="center"
                     android:textSize="24sp"
-                    android:textStyle="bold" />
+                    android:textStyle="bold"
+                    android:layout_marginLeft="75dp"
+                    android:layout_marginRight="75dp"/>
             </LinearLayout>
 
 
@@ -213,13 +216,22 @@
 
     </LinearLayout>
 
-    <Button
+    <ImageView
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/common_add"
+        android:src="@drawable/next_arrow"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
+        android:layout_margin="10dp"/>
+
+    <ImageView
+        android:id="@+id/btn_back"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/back_arrow"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
         android:layout_margin="10dp"/>
 
 </RelativeLayout>

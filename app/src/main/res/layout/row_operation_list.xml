@@ -27,8 +27,9 @@
             android:gravity="center_vertical"
             android:paddingLeft="20dp"
             android:textColor="#040404"
-            android:textSize="20dp"
-            android:typeface="sans" />
+            android:textSize="16dp"
+            android:typeface="sans"
+            android:layout_marginRight="10dp"/>
 
         <ImageView
             android:id="@+id/imv_options"

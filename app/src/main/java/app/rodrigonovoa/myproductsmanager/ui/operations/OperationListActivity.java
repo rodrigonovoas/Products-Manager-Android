@@ -31,7 +31,7 @@ public class OperationListActivity extends AppCompatActivity {
     static TextView tv_total, tv_from, tv_to;
     static ImageView imv_from, imv_to, imv_clear, imv_filter;
     static ListView lv_operations;
-    static Button btn_add;
+    static ImageView btn_add, btn_back;
     static Calendar cal;
 
     private static String fromdate, todate;
@@ -74,6 +74,8 @@ public class OperationListActivity extends AppCompatActivity {
         imv_filter = findViewById(R.id.imv_filter);
 
         btn_add = findViewById(R.id.btn_add);
+        btn_back = findViewById(R.id.btn_back);
+
         sp_types = findViewById(R.id.sp_types);
 
         String[] arraySpinner = null;
@@ -122,6 +124,12 @@ public class OperationListActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), AddModifyOperation.class);
                 startActivity(intent);
+            }
+        });
+
+        btn_back.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                finish();
             }
         });
     }
@@ -286,10 +294,15 @@ public class OperationListActivity extends AppCompatActivity {
 
 
     private static void setTotalAmount(List<Operation> operations){
+        Context context =tv_total.getContext();
         float total = 0.0f;
 
         for(int i=0;i<operations.size();i++){
-            total += operations.get(i).cost;
+            if(operations.get(i).getType().equalsIgnoreCase(context.getString(R.string.operation_spinnder_purchase))){
+                total -= operations.get(i).cost;
+            }else{
+                total += operations.get(i).cost;
+            }
         }
 
         if (total != 0) {

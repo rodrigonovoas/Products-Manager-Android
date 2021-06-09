@@ -13,21 +13,11 @@
         android:orientation="vertical"
         android:layout_margin="20dp">
 
-        <TextView
-            android:id="@+id/tv_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginBottom="8dp"
-            android:fontFamily="sans-serif"
-            android:text="@string/operation_info_title"
-            android:textColor="@color/colorAccent"
-            android:textSize="34sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
+       <androidx.constraintlayout.utils.widget.ImageFilterView
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:src="@drawable/operation_icon"
+           android:layout_gravity="center_horizontal"/>
 
         <LinearLayout
             android:layout_marginTop="30dp"

@@ -21,7 +21,7 @@ import app.rodrigonovoa.myproductsmanager.database.ProductsManagerDb;
 
 public class ContactActivity extends AppCompatActivity {
 
-    ImageView imv_contact;
+    static ImageView imv_contact;
     static TextView tv_name;
     static TextView tv_type;
     static TextView tv_origin;
@@ -71,6 +71,12 @@ public class ContactActivity extends AppCompatActivity {
     }
 
     public static void loadContact(Contact contact) {
+        if(contact.getType().equalsIgnoreCase(imv_contact.getContext().getString(R.string.add_contacts_provider))){
+            imv_contact.setImageResource(R.drawable.contacts_provider_icon);
+        }else{
+            imv_contact.setImageResource(R.drawable.contacts_client_icon);
+        }
+
         tv_name.setText(contact.getName());
         tv_type.setText(contact.getType());
         tv_origin.setText(contact.getOrigin());

@@ -118,7 +118,7 @@ public class AddModifyOperation extends AppCompatActivity {
                     finish();
                 }else{
                     if (edt_qty.getText().toString().equalsIgnoreCase("0")) {
-                        Toast.makeText(mContext, "Por favor, introduzca una cantidad.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(mContext, mContext.getString(R.string.operation_add_qty_warning_msg), Toast.LENGTH_SHORT).show();
                     } else {
                         addOperation();
                     }
@@ -318,7 +318,7 @@ public class AddModifyOperation extends AppCompatActivity {
                 }
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
-                        android.R.layout.simple_spinner_item, arraySpinner);
+                        R.layout.spinner_item, arraySpinner);
 
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 sp_contacts.setAdapter(adapter);
@@ -368,7 +368,7 @@ public class AddModifyOperation extends AppCompatActivity {
                 }
 
                 ArrayAdapter<String> adapter = new ArrayAdapter<String>(mContext,
-                        android.R.layout.simple_spinner_item, arraySpinner);
+                        R.layout.spinner_item, arraySpinner);
 
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 sp_products.setAdapter(adapter);
@@ -455,7 +455,7 @@ public class AddModifyOperation extends AppCompatActivity {
 
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arraySpinner);
+                R.layout.spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sp_type.setAdapter(adapter);
     }

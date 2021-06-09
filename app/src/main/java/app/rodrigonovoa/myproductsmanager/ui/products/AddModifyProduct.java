@@ -137,7 +137,14 @@ public class AddModifyProduct extends AppCompatActivity {
         product.setName(edt_name.getText().toString());
         product.setRegistrationdate(Utils.getInstance().currentDateToTimestamp());
         product.setSaleprice(Float.valueOf(edt_salePrice.getText().toString()));
-        product.setPurchaseprice(Float.valueOf(edt_purchasePrice.getText().toString()));
+
+
+        if(edt_purchasePrice.getText().toString().equalsIgnoreCase("")){
+            product.setPurchaseprice(0);
+        }else{
+            product.setPurchaseprice(Float.valueOf(edt_purchasePrice.getText().toString()));
+        }
+
         product.setImagepath(image_path);
         product.setNotations(edt_notes.getText().toString());
 

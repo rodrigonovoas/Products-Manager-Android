@@ -37,28 +37,32 @@
         app:layout_constraintTop_toBottomOf="@+id/tv_title"
         app:layout_constraintVertical_bias="0.18" />
 
-    <Button
+    <ImageView
         android:id="@+id/btn_add_product"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:src="@drawable/next_arrow"
         android:text="@string/common_add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.938"
+        app:layout_constraintHorizontal_bias="0.944"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lv_products_list"
-        app:layout_constraintVertical_bias="0.442" />
+        app:layout_constraintVertical_bias="0.761" />
 
-    <Button
+    <ImageView
         android:id="@+id/btn_back"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
+        android:src="@drawable/back_arrow"
         android:text="@string/common_back"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/btn_add_product"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/lv_products_list"
-        app:layout_constraintVertical_bias="0.442" />
+        app:layout_constraintVertical_bias="0.761" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

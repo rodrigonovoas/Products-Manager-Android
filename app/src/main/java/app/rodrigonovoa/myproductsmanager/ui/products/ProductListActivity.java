@@ -3,10 +3,12 @@ package app.rodrigonovoa.myproductsmanager.ui.products;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
+import android.media.Image;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.lang.ref.WeakReference;
@@ -24,7 +26,7 @@ public class ProductListActivity extends AppCompatActivity {
 
     private ProductsManagerDb database;
     private ListView lv_products;
-    private Button btn_add, btn_back;
+    private ImageView btn_add, btn_back;
 
     @Override
     protected void onResume() {
@@ -39,8 +41,8 @@ public class ProductListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_product_list);
 
         lv_products = (ListView) findViewById(R.id.lv_products_list);
-        btn_add = (Button) findViewById(R.id.btn_add_product);
-        btn_back = (Button) findViewById(R.id.btn_back);
+        btn_add = (ImageView) findViewById(R.id.btn_add_product);
+        btn_back = (ImageView) findViewById(R.id.btn_back);
 
         //get db
 

@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.lang.ref.WeakReference;
@@ -20,7 +21,7 @@ public class ContactListActivity extends AppCompatActivity {
 
     private ProductsManagerDb database = null;
     private ListView lv_contacts;
-    private Button btn_add, btn_back;
+    private ImageView btn_add, btn_back;
 
     @Override
     protected void onResume() {
@@ -35,8 +36,8 @@ public class ContactListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_contact_list);
 
         lv_contacts = (ListView) findViewById(R.id.lv_contacts);
-        btn_add = (Button) findViewById(R.id.btn_add_contact);
-        btn_back = (Button) findViewById(R.id.btn_back);
+        btn_add = (ImageView) findViewById(R.id.btn_add_contact);
+        btn_back = (ImageView) findViewById(R.id.btn_back);
 
 
         //get database ref

@@ -20,6 +20,7 @@ import android.widget.Toast;
 import java.util.List;
 
 import app.rodrigonovoa.myproductsmanager.R;
+import app.rodrigonovoa.myproductsmanager.common.Utils;
 import app.rodrigonovoa.myproductsmanager.database.Operation;
 import app.rodrigonovoa.myproductsmanager.database.OperationDAO;
 import app.rodrigonovoa.myproductsmanager.database.Product;
@@ -117,7 +118,7 @@ public class OperationListAdapter extends ArrayAdapter<Operation> {
                 }
             });
 
-            tv_name.setText(operation.getName() + " | " + context.getString(R.string.operation_info_price) + ": " + String.valueOf(operation.getPrice()) + " | " + context.getString(R.string.operation_info_qty) + ": " +
+            tv_name.setText( Utils.getInstance().fromTimestampToDateString(operation.getRegistrationdate()) + " | " + operation.getName() + " | " + context.getString(R.string.operation_info_price) + ": " + String.valueOf(operation.getPrice()) + " | " + context.getString(R.string.operation_info_qty) + ": " +
                     String.valueOf(operation.getQuantity()) + " | " + context.getString(R.string.operation_info_cost) + ": "  + String.valueOf(operation.getCost()));
         }
 

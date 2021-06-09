@@ -46,18 +46,6 @@
         app:layout_constraintVertical_bias="0.058" />
 
 
-    <ImageView
-        android:id="@+id/imv_product"
-        android:layout_width="200dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:layout_marginEnd="8dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@drawable/contacts_question" />
 
     <EditText
         android:id="@+id/edt_name"
@@ -97,6 +85,7 @@
         app:layout_constraintVertical_bias="0.147" />
 
     <Button
+        android:visibility="invisible"
         android:id="@+id/btn_add_image"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -128,5 +117,15 @@
         android:text="@string/common_back"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/imv_product"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/product_row_icon" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

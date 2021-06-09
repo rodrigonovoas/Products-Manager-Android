@@ -82,7 +82,7 @@ public class AddModifyContact extends AppCompatActivity {
         };
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_spinner_item, arraySpinner);
+                R.layout.spinner_item, arraySpinner);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spContactsType.setAdapter(adapter);
 
