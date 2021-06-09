@@ -26,18 +26,27 @@ public class Utils {
         return timestamp_date;
     }
 
-    public Long fromDateToTimestamp(String date){
+    public Long fromDateToTimestamp(String date, Boolean to_date){
         Timestamp timestamp = null;
+
+        if(to_date){
+            date = date + " 23:59:59";
+        }
 
         try {
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+
+            if(to_date){
+              dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm:ss");
+            }
+
             Date parsedDate = dateFormat.parse(date);
             timestamp = new java.sql.Timestamp(parsedDate.getTime());
         } catch(Exception e) { //this generic but you can control another types of exception
             // look the origin of excption
         }
 
-        return timestamp.getTime();
+        return timestamp.getTime() / 1000;
     }
 
     public String fromTimestampToDateString(Long time){

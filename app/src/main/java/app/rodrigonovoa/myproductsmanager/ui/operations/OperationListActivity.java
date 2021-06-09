@@ -163,7 +163,7 @@ public class OperationListActivity extends AppCompatActivity {
                     }
                 }
 
-                todate_num = Utils.getInstance().fromDateToTimestamp(todate);
+                todate_num = Utils.getInstance().fromDateToTimestamp(todate, true);
 
                 tv_to.setText(todate);
             }
@@ -196,7 +196,7 @@ public class OperationListActivity extends AppCompatActivity {
                     }
                 }
 
-                fromdate_num = Utils.getInstance().fromDateToTimestamp(fromdate);
+                fromdate_num = Utils.getInstance().fromDateToTimestamp(fromdate, false);
                 tv_from.setText(fromdate);
             }
         }
@@ -230,20 +230,22 @@ public class OperationListActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Operation> operations) {
             if (operations!=null && operations.size()>0 ){
-                setUpAdapterAndClear(operations);
+                setUpAdapterAndClear(operations,false);
                 setTotalAmount(operations);
             }
         }
 
     }
 
-    private static void setUpAdapterAndClear(List<Operation> operations){
+    private static void setUpAdapterAndClear(List<Operation> operations, Boolean clear){
+
+        lv_operations.setAdapter(null);
 
         //clearing variables
 
-
-        lv_operations.setAdapter(null);
-        clearDates();
+        if (clear){
+            clearDates();
+        }
 
         //setting adapter
 
