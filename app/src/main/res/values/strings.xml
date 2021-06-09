@@ -1,0 +1,118 @@
+<resources>
+    <string name="app_name">MyProductsManager</string>
+
+    <!-- COMMON -->
+
+    <string name="common_back">Back</string>
+    <string name="common_accept">Continue</string>
+    <string name="common_save">Save</string>
+    <string name="common_add">Add</string>
+    <string name="common_record_deleted">Record Deleted</string>
+
+    <!-- MAIN ACTIVITY -->
+
+    <string name="main_title">MENU</string>
+    <string name="main_sales_purchases">SALES/PURCHASES</string>
+    <string name="main_products">PRODUCTS</string>
+    <string name="main_clients_providers">CLI./PROV.</string>
+    <string name="main_copy">BACKUP</string>
+    <string name="main_todo">TODO LIST</string>
+    <string name="main_exit">EXIT</string>
+
+    <!-- OPERATIONS ACTIVITY -->
+
+    <string name="operation_info_title">OPERATION</string>
+
+    <string name="operation_info_product">Product</string>
+    <string name="operation_info_date">Date</string>
+    <string name="operation_info_type">Type</string>
+    <string name="operation_info_price">Price</string>
+    <string name="operation_info_qty">Quantity</string>
+    <string name="operation_info_cost">Cost</string>
+    <string name="operation_info_contact">Contact</string>
+    <string name="operation_info_notes">Notes</string>
+
+    <!-- OPERATIONS ACTIVITY LIST -->
+
+    <string name="operation_activity_title">SALES AND PURCHASES</string>
+    <string name="operation_activity_type">Type</string>
+    <string name="operation_activity_from">from</string>
+    <string name="operation_activity_to">to</string>
+
+    <string name="operation_spinner_sale">Sale</string>
+    <string name="operation_spinnder_purchase">Purchase</string>
+    <string name="operation_spinner_all">All</string>
+
+    <!-- OPERATIONS ADD/MODIFY -->
+
+    <string name="operation_add_type">Operation Type</string>
+    <string name="operation_add_contact">Contact</string>
+    <string name="operation_add_Product">Product</string>
+    <string name="operation_add_price">Price</string>
+    <string name="operation_add_qty">Quantity</string>
+    <string name="operation_add_cost">Cost</string>
+    <string name="operation_add_notes">Notes</string>
+
+
+    <!-- CONTACT ACTIVITY -->
+
+    <string name="contact_activity_title">Contact</string>
+    <string name="contact_activity_name">Name</string>
+    <string name="contact_activity_type">Type</string>
+    <string name="contact_activity_origin">Origin</string>
+    <string name="contact_activity_note">Note</string>
+
+
+    <!-- ADD/MODIFY CONTACTS -->
+
+    <string name="add_contacts_name">Name</string>
+    <string name="add_contacts_procedence">Origin</string>
+    <string name="add_contacts_notations">Notations</string>
+    <string name="add_contacts_image">Image</string>
+
+    <string name="add_contacts_client">Client</string>
+    <string name="add_contacts_provider">Provider</string>
+
+    <!-- CONTACTS LIST -->
+
+    <string name="list_contacts_title">Clients and Providers</string>
+
+    <string name="contact_list_dialog_option1">Cancel</string>
+    <string name="contact_list_dialog_option2">Delete</string>
+    <string name="contact_list_dialog_option3">Modify</string>
+    <string name="contact_list_dialog_title">Options</string>
+
+    <!-- PRODUCT ACTIVITY -->
+
+    <string name="product_activity_title">Product</string>
+    <string name="product_activity_name">Name</string>
+    <string name="product_activity_purchase">Purchase Price</string>
+    <string name="product_activity_sale">Sale Price</string>
+    <string name="product_activity_note">Note</string>
+
+    <!-- ADD/MODIFY PRODUCTS` -->
+
+    <string name="add_products_name">Name</string>
+    <string name="add_products_sale_price">Sale Price</string>
+    <string name="add_products_purchase_price">Purchase Price</string>
+    <string name="add_products_notations">Notations</string>
+    <string name="add_products_image">Image</string>
+
+    <!-- PRODUCTS LIST -->
+
+    <string name="list_products_title">Products</string>
+
+    <!-- TO-DO LIST -->
+
+    <string name="list_todo_done">Done</string>
+    <string name="list_todo_title">Todo List</string>
+
+    <string name="list_todo_dialog_title">Do you want to delete this task?</string>
+    <string name="list_todo_dialog_option1">Yes</string>
+    <string name="list_todo_dialog_option2">No</string>
+
+    <string name="list_todo_add_dialog_title">Do you want to add this task?</string>
+    <string name="list_todo_add_dialog_option1">Yes</string>
+    <string name="list_todo_add_dialog_option2">No</string>
+
+</resources>
