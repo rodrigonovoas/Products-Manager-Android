@@ -1,12 +1,6 @@
 package app.rodrigonovoa.myproductsmanager.ui.backup;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.sqlite.db.SimpleSQLiteQuery;
-
-import android.Manifest;
-import android.app.Activity;
-import android.content.pm.PackageManager;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -23,9 +17,9 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
 
 import app.rodrigonovoa.myproductsmanager.R;
+import app.rodrigonovoa.myproductsmanager.common.Utils;
 import app.rodrigonovoa.myproductsmanager.database.Contact;
 import app.rodrigonovoa.myproductsmanager.database.Operation;
 import app.rodrigonovoa.myproductsmanager.database.Product;
@@ -39,6 +33,7 @@ public class BackUpActivity extends AppCompatActivity {
     private ProductsManagerDb database;
     private String bigText = "";
     private TextView tv_main;
+    private Utils utils;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +42,8 @@ public class BackUpActivity extends AppCompatActivity {
 
         //get db
         database = ProductsManagerDb.getInstance(this);
+
+        utils = Utils.getInstance();
 
         tv_main = findViewById(R.id.tv_content);
 
@@ -57,7 +54,7 @@ public class BackUpActivity extends AppCompatActivity {
         tv_main.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createPdf(bigText);
+                createPdf("venga tu acuestate chavaaal aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaa \n siuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
             }
         });
 
@@ -68,7 +65,7 @@ public class BackUpActivity extends AppCompatActivity {
         // create a new document
         PdfDocument document = new PdfDocument();
         // crate a page description
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(300, 600, 1).create();
+        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(100, 100, 1).create();
         // start a page
         PdfDocument.Page page = document.startPage(pageInfo);
         Canvas canvas = page.getCanvas();
@@ -79,13 +76,13 @@ public class BackUpActivity extends AppCompatActivity {
 
         document.finishPage(page);
 
-        File f_pdf = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/testpdf777.pdf");
+        File f_pdf = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/procts_manager_backup_" + utils.currentDateToTimestamp().toString() + ".pdf");
 
         try {
             document.writeTo(new FileOutputStream(f_pdf));
-            Toast.makeText(this, "Done", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Backup created.", Toast.LENGTH_LONG).show();
         } catch (IOException e) {
-            Log.e("main", "error "+e.toString());
+            Log.e("backup", "error "+e.toString());
             Toast.makeText(this, "Something wrong: " + e.toString(),  Toast.LENGTH_LONG).show();
         }
         // close the document
