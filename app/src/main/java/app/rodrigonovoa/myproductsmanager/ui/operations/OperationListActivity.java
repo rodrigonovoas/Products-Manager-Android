@@ -229,10 +229,8 @@ public class OperationListActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Operation> operations) {
-            if (operations!=null && operations.size()>0 ){
-                setUpAdapterAndClear(operations,false);
-                setTotalAmount(operations);
-            }
+            setUpAdapterAndClear(operations,false);
+            setTotalAmount(operations);
         }
 
     }

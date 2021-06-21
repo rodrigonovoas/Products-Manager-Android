@@ -7,6 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Path;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.os.StrictMode;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -50,6 +51,8 @@ public class AddModifyOperation extends AppCompatActivity {
     static TextView tv_cost;
     static TextView tv_contact_type_title;
     Button btn_add, btn_back;
+
+    private Boolean sale_type = true;
 
     static CountDownLatch signal = new CountDownLatch(2);
 
@@ -106,7 +109,14 @@ public class AddModifyOperation extends AppCompatActivity {
         }
 
         if(value > 0){
-            new getOperationTask(database.operationDAO()).execute(value);
+            final Handler handler = new Handler();
+            handler.postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    new getOperationTask(database.operationDAO()).execute(value);
+                }
+            }, 1500);
+
         }
 
         btn_add.setOnClickListener(new View.OnClickListener() {
@@ -147,6 +157,32 @@ public class AddModifyOperation extends AppCompatActivity {
 
         });
 
+        sp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                String sale = getString(R.string.operation_spinner_sale);
+
+                if (sp_type.getSelectedItem().toString().equalsIgnoreCase(sale)) {
+                    sale_type = true;
+                    contact_type = getString(R.string.add_contacts_client);
+                    tv_contact_type_title.setText(getString(R.string.add_contacts_client));
+                } else {
+                    sale_type = false;
+                    contact_type = getString(R.string.add_contacts_provider);
+                    tv_contact_type_title.setText(getString(R.string.add_contacts_provider));
+                }
+
+                loadContactsSpinner();
+                tv_price.setText(String.valueOf(loadProvisionalPrice(sp_products.getSelectedItemPosition())));
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // código
+            }
+
+        });
+
         edt_qty.setText("0");
 
 
@@ -171,86 +207,65 @@ public class AddModifyOperation extends AppCompatActivity {
 
     }
 
-    private void setUpSpTypesListener(Context context){
-        sp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
-
-                String sale = context.getString(R.string.operation_spinner_sale);
-
-                if (sp_type.getSelectedItem().toString().equalsIgnoreCase(sale)) {
-                    contact_type = context.getString(R.string.add_contacts_client);
-                    tv_contact_type_title.setText(context.getString(R.string.add_contacts_client));
-                    loadContactsSpinner();
-                } else {
-                    contact_type = context.getString(R.string.add_contacts_provider);
-                    tv_contact_type_title.setText(context.getString(R.string.add_contacts_provider));
-                    loadContactsSpinner();
-                }
-
-            }
-
-            @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
-        });
-    }
 
     private void fillWithOperationData(Operation operation){
-        edt_qty.setText(String.valueOf(operation.getQuantity()));
-        edt_notes.setText(operation.getNotations());
-        tv_price.setText(String.valueOf(operation.getPrice()));
-        tv_cost.setText(String.valueOf(operation.getCost()));
 
-        precio_provisional = operation.getPrice();
-        importe_provisional = operation.getCost();
-
-        try {
-            signal.await();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        int product_position = 0;
-        int contacts_position = 0;
-
-        product_position = productsid_list.indexOf(operation.productid);
-        contacts_position = contactsid_list.indexOf(operation.contactid);
-
-
-        String sale = sp_type.getContext().getString(R.string.operation_spinner_sale);
-        int type_position = 0;
-
-        if(operation.getType().equalsIgnoreCase(sale)){
-            type_position = 0;
-        }else{
-            type_position = 1;
-        }
-
-        int finalType_position = type_position;
-        sp_type.post(new Runnable() {
-            @Override
+        runOnUiThread(new Runnable() {
             public void run() {
-                sp_type.setSelection(finalType_position);
-            }
-        });
+                edt_qty.setText(String.valueOf(operation.getQuantity()));
+                edt_notes.setText(operation.getNotations());
+                tv_price.setText(String.valueOf(operation.getPrice()));
+                tv_cost.setText(String.valueOf(operation.getCost()));
 
-        int finalProduct_position = product_position;
-        sp_products.post(new Runnable() {
-            @Override
-            public void run() {
-                sp_products.setSelection(finalProduct_position);
-            }
-        });
+                precio_provisional = operation.getPrice();
+                importe_provisional = operation.getCost();
 
-        int finalContacts_position = contacts_position;
+                try {
+                    signal.await();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-        sp_contacts.post(new Runnable() {
-            @Override
-            public void run() {
-                sp_contacts.setSelection(finalContacts_position);
+                int product_position = 0;
+                int contacts_position = 0;
+
+                product_position = productsid_list.indexOf(operation.productid);
+                contacts_position = contactsid_list.indexOf(operation.contactid);
+
+
+                String sale = sp_type.getContext().getString(R.string.operation_spinner_sale);
+                int type_position = 0;
+
+                if(operation.getType().equalsIgnoreCase(sale)){
+                    type_position = 0;
+                }else{
+                    type_position = 1;
+                }
+
+                int finalType_position = type_position;
+                sp_type.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        sp_type.setSelection(finalType_position);
+                    }
+                });
+
+                int finalProduct_position = product_position;
+                sp_products.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        sp_products.setSelection(finalProduct_position);
+                    }
+                });
+
+                int finalContacts_position = contacts_position;
+
+                sp_contacts.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        sp_contacts.setSelection(finalContacts_position);
+                    }
+                });
             }
         });
 
@@ -472,7 +487,13 @@ public class AddModifyOperation extends AppCompatActivity {
     public float loadProvisionalPrice(int position) {
         float price = 0.0f;
         if (position >= 0){
-            price = products_list.get(position).getSaleprice();
+
+            if(sale_type){
+                price = products_list.get(position).getSaleprice();
+            }else{
+                price = products_list.get(position).getPurchaseprice();
+            }
+
             precio_provisional = price;
         }
 
