@@ -3,8 +3,6 @@ package app.rodrigonovoa.myproductsmanager.ui.operations;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
-import android.database.sqlite.SQLiteDatabase;
-import android.graphics.Path;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
