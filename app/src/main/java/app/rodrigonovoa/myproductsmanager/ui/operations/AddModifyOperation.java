@@ -97,7 +97,7 @@ public class AddModifyOperation extends AppCompatActivity {
         database = ProductsManagerDb.getInstance(this);
 
         loadTypesSpinner();
-        loadContactsSpinner();
+        //loadContactsSpinner();
         loadProductsSpinner();
 
         //get activity parameter
@@ -172,6 +172,7 @@ public class AddModifyOperation extends AppCompatActivity {
                     tv_contact_type_title.setText(getString(R.string.add_contacts_provider));
                 }
 
+                sp_contacts.setAdapter(null);
                 loadContactsSpinner();
                 tv_price.setText(String.valueOf(loadProvisionalPrice(sp_products.getSelectedItemPosition())));
             }
