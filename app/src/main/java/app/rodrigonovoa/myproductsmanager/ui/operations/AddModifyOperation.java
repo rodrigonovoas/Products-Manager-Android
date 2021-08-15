@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -40,6 +41,8 @@ import app.rodrigonovoa.myproductsmanager.ui.products.AddModifyProduct;
 public class AddModifyOperation extends AppCompatActivity {
 
     private Context mContext;
+
+    static ProgressBar pb_loading;
     static Spinner sp_products;
     static Spinner sp_type;
     static Spinner sp_contacts;
@@ -85,6 +88,7 @@ public class AddModifyOperation extends AppCompatActivity {
         sp_products = (Spinner) findViewById(R.id.sp_products);
         sp_type = (Spinner) findViewById(R.id.sp_type);
         sp_contacts = (Spinner) findViewById(R.id.sp_contacts);
+        pb_loading = (ProgressBar) findViewById(R.id.pb_loading);
 
         contact_type = getString(R.string.add_contacts_client);
 
@@ -107,6 +111,7 @@ public class AddModifyOperation extends AppCompatActivity {
         }
 
         if(value > 0){
+            pb_loading.setVisibility(View.VISIBLE);
             final Handler handler = new Handler();
             handler.postDelayed(new Runnable() {
                 @Override
@@ -287,6 +292,8 @@ public class AddModifyOperation extends AppCompatActivity {
             operation = mOperationDAO.getOperationById(position[0].intValue());
 
             fillWithOperationData(operation);
+
+            pb_loading.setVisibility(View.INVISIBLE);
 
             Log.d(getClass().getSimpleName(), "get operation at background");
 
