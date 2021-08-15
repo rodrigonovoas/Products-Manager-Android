@@ -1,6 +1,8 @@
 package app.rodrigonovoa.myproductsmanager.ui.backup;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -10,10 +12,11 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
+import android.widget.ImageView;
 import android.widget.Toast;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.List;
@@ -24,15 +27,12 @@ import app.rodrigonovoa.myproductsmanager.database.Contact;
 import app.rodrigonovoa.myproductsmanager.database.Operation;
 import app.rodrigonovoa.myproductsmanager.database.Product;
 import app.rodrigonovoa.myproductsmanager.database.ProductsManagerDb;
-import app.rodrigonovoa.myproductsmanager.ui.contacts.ContactListActivity;
-import app.rodrigonovoa.myproductsmanager.ui.operations.OperationListActivity;
-import app.rodrigonovoa.myproductsmanager.ui.products.ProductListActivity;
 
 public class BackUpActivity extends AppCompatActivity {
 
     private ProductsManagerDb database;
     private String bigText = "";
-    private TextView tv_main;
+    private ImageView imv_backup;
     private Utils utils;
 
     @Override
@@ -45,48 +45,32 @@ public class BackUpActivity extends AppCompatActivity {
 
         utils = Utils.getInstance();
 
-        tv_main = findViewById(R.id.tv_content);
+        imv_backup = findViewById(R.id.imv_backup);
 
+        new retrieveProductsTask(this).execute();
         new retrieveContactsTask(this).execute();
         new retrieveOperationsTask(this).execute();
-        new retrieveProductsTask(this).execute();
 
-        tv_main.setOnClickListener(new View.OnClickListener() {
+        imv_backup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                createPdf("venga tu acuestate chavaaal aaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaa aaaaaaaaaa \n siuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuu");
+                createTxtBackup(BackUpActivity.this,bigText);
             }
         });
 
     }
 
-
-    private void createPdf(String sometext){
-        // create a new document
-        PdfDocument document = new PdfDocument();
-        // crate a page description
-        PdfDocument.PageInfo pageInfo = new PdfDocument.PageInfo.Builder(100, 100, 1).create();
-        // start a page
-        PdfDocument.Page page = document.startPage(pageInfo);
-        Canvas canvas = page.getCanvas();
-
-        Paint paint = new Paint();
-        paint.setColor(Color.BLACK);
-        canvas.drawText(sometext, 80, 50, paint);
-
-        document.finishPage(page);
-
-        File f_pdf = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/procts_manager_backup_" + utils.currentDateToTimestamp().toString() + ".pdf");
-
+    public void createTxtBackup(Context context, String sBody) {
         try {
-            document.writeTo(new FileOutputStream(f_pdf));
-            Toast.makeText(this, "Backup created.", Toast.LENGTH_LONG).show();
+            File f_pdf = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS) + "/products_manager_backup_" + utils.currentDateToTimestamp().toString() + ".txt");
+            FileWriter writer = new FileWriter(f_pdf);
+            writer.append(sBody);
+            writer.flush();
+            writer.close();
+            Toast.makeText(context, "Backup saved at Downloads folder", Toast.LENGTH_SHORT).show();
         } catch (IOException e) {
-            Log.e("backup", "error "+e.toString());
-            Toast.makeText(this, "Something wrong: " + e.toString(),  Toast.LENGTH_LONG).show();
+            e.printStackTrace();
         }
-        // close the document
-        document.close();
     }
 
     private class retrieveContactsTask extends AsyncTask<Void,Void, List<Contact>> {
@@ -109,7 +93,12 @@ public class BackUpActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(List<Contact> contacts) {
             if (contacts!=null && contacts.size()>0 ){
-                bigText += "\n" + contacts.toString();
+                bigText += "\n" + "----- CONTACTS -----";
+
+                for (int i = 0; i < contacts.size(); i++) {
+                    bigText += "\n" + "ID: " + contacts.get(i).getContactid() + " Name: " + contacts.get(i).getName() + " Type: " + contacts.get(i).getType() + " Origin: " + contacts.get(i).getOrigin() + " Notations: "
+                    + contacts.get(i).getNotations();
+                }
             }
 
         }
@@ -136,8 +125,12 @@ public class BackUpActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Operation> operations) {
-            if (operations!=null && operations.size()>0 ){
-                bigText += "\n" + operations.toString();
+            if (operations != null && operations.size() > 0) {
+                bigText += "\n" + "----- OPERATIONS -----";
+
+                for (int i = 0; i < operations.size(); i++) {
+                    bigText += "\n" + " Name: " + operations.get(i).getName() + " Type: " + operations.get(i).getType() + " Price: " + operations.get(i).getPrice() + " Qty: " + operations.get(i).getQuantity() + " Cost: " + operations.get(i).getCost() + " ContactID: " + operations.get(i).getContactid() + " Notations: " + operations.get(i).getNotations();
+                }
             }
         }
 
@@ -162,10 +155,15 @@ public class BackUpActivity extends AppCompatActivity {
 
         @Override
         protected void onPostExecute(List<Product> products) {
-            if (products!=null && products.size()>0 ){
-                bigText += "\n" + products.toString();
+            if (products != null && products.size() > 0) {
+                bigText += "\n" + "----- PRODUCTS -----";
+
+                for (int i = 0; i < products.size(); i++) {
+                    bigText += "\n" + "Name: " + products.get(i).getName() + " Purchase Price: " + products.get(i).getPurchaseprice() + " Sale Price: " + products.get(i).getSaleprice() + " Notations: " + products.get(i).getNotations();
+                }
             }
         }
 
     }
+
 }
