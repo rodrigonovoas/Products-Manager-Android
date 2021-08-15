@@ -58,7 +58,7 @@ public class AddModifyOperation extends AppCompatActivity {
 
     int value = -1;
 
-    List<Contact> contacts_list = null;
+    List<Contact> contacts_list = new ArrayList<Contact>();
     static List<Product> products_list = null;
 
     static List<Integer> productsid_list = new ArrayList<Integer>();
@@ -170,6 +170,8 @@ public class AddModifyOperation extends AppCompatActivity {
                     tv_contact_type_title.setText(getString(R.string.add_contacts_provider));
                 }
 
+                contacts_list = new ArrayList<Contact>();
+                contactsid_list = new ArrayList<Integer>();
                 sp_contacts.setAdapter(null);
                 loadContactsSpinner();
                 tv_price.setText(String.valueOf(loadProvisionalPrice(sp_products.getSelectedItemPosition())));
@@ -315,8 +317,13 @@ public class AddModifyOperation extends AppCompatActivity {
             if (contacts != null && contacts.size() > 0) {
                 contacts_list = contacts;
 
+                contacts.add(null);
                 for(int i=0;i<contacts.size();i++){
-                    contactsid_list.add(contacts.get(i).contactid);
+                    if(contacts.get(i)==null){
+                        contactsid_list.add(0);
+                    }else{
+                        contactsid_list.add(contacts.get(i).contactid);
+                    }
                 }
 
                 String[] arraySpinner = null;
@@ -324,7 +331,11 @@ public class AddModifyOperation extends AppCompatActivity {
                 List<String> contactList = new ArrayList<String>();
 
                 for(int i=0;i<contacts.size();i++){
-                    contactList.add(contacts.get(i).getName());
+                    if(contacts.get(i)==null){
+                        contactList.add("");
+                    }else{
+                        contactList.add(contacts.get(i).getName());
+                    }
                 }
 
                 if(contactList.size() > 0){
@@ -428,13 +439,19 @@ public class AddModifyOperation extends AppCompatActivity {
 
     private Operation getNewOperation(){
         Operation newOperation = new Operation();
-        Contact addedContact = contacts_list.get(sp_contacts.getSelectedItemPosition());
+
+        if(contacts_list.size() > 0 && contacts_list.get(sp_contacts.getSelectedItemPosition()) != null){
+            Contact addedContact = contacts_list.get(sp_contacts.getSelectedItemPosition());
+            newOperation.setContactid(addedContact.getContactid());
+        }else{
+            newOperation.setContactid(null);
+        }
+
         Product addedProduct = products_list.get(sp_products.getSelectedItemPosition());
 
         newOperation.setCost(importe_provisional);
         newOperation.setRegistrationdate(Utils.getInstance().currentDateToTimestamp());
         newOperation.setPrice(precio_provisional);
-        newOperation.setContactid(addedContact.getContactid());
         newOperation.setProductid(addedProduct.getProductid());
         newOperation.setName(addedProduct.getName());
         newOperation.setNotations(edt_notes.getText().toString());

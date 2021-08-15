@@ -151,7 +151,7 @@ public class OperationActivity extends AppCompatActivity {
             new getProductByIdTask(database.productDAO()).execute(operation.getProductid());
         }
 
-        if(operation.getContactid() > 0){
+        if(operation.getContactid() != null && operation.getContactid() > 0){
             new getContactByIdTask(database.contactDAO()).execute(operation.getContactid());
         }
     }

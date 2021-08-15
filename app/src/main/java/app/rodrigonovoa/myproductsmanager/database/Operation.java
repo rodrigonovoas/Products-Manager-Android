@@ -36,7 +36,7 @@ public class Operation {
 
     public int productid;
 
-    public int contactid;
+    public Integer contactid;
 
     //getters
 
@@ -77,7 +77,7 @@ public class Operation {
         return productid;
     }
 
-    public int getContactid() {
+    public Integer getContactid() {
         return contactid;
     }
 
@@ -120,7 +120,7 @@ public class Operation {
         this.productid = productid;
     }
 
-    public void setContactid(int contactid) {
+    public void setContactid(Integer contactid) {
         this.contactid = contactid;
     }
 }
