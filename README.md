@@ -14,7 +14,6 @@ App for products management
 
 <li>Java as main language</li>
 <li>OOP as main paradigm</li>
-<li>MVVM design pattern</li>
 <li>Room and SQLite to create and manage the database</li>
 <li>Asynctasks to interact with the db data</li>
 <li>Unix  Timestamp to manage dates</li>
