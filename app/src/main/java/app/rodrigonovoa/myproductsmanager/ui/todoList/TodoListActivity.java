@@ -13,6 +13,7 @@ import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 
 import java.lang.ref.WeakReference;
@@ -33,7 +34,7 @@ public class TodoListActivity extends AppCompatActivity {
 
     private ProductsManagerDb database;
     private ListView lv_todo;
-    private Button btn_back, btn_add;
+    private ImageView imv_back, imv_add;
 
     @Override
     protected void onResume() {
@@ -48,20 +49,20 @@ public class TodoListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_todo_list);
 
         lv_todo = (ListView) findViewById(R.id.lv_todo_list);
-        btn_back = (Button) findViewById(R.id.btn_back);
-        btn_add = (Button) findViewById(R.id.btn_add);
+        imv_back = (ImageView) findViewById(R.id.imv_back);
+        imv_add = (ImageView) findViewById(R.id.imv_add);
 
         //get db
 
         database = ProductsManagerDb.getInstance(this);
 
-        btn_back.setOnClickListener(new View.OnClickListener() {
+        imv_back.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 finish();
             }
         });
 
-        btn_add.setOnClickListener(new View.OnClickListener() {
+        imv_add.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 openAddDialog();
             }

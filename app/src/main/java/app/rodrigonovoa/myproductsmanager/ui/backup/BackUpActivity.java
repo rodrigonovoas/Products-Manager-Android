@@ -32,7 +32,7 @@ public class BackUpActivity extends AppCompatActivity {
 
     private ProductsManagerDb database;
     private String bigText = "";
-    private ImageView imv_backup;
+    private ImageView imv_backup, imv_back;
     private Utils utils;
 
     @Override
@@ -46,6 +46,7 @@ public class BackUpActivity extends AppCompatActivity {
         utils = Utils.getInstance();
 
         imv_backup = findViewById(R.id.imv_backup);
+        imv_back = findViewById(R.id.imv_back);
 
         new retrieveProductsTask(this).execute();
         new retrieveContactsTask(this).execute();
@@ -55,6 +56,13 @@ public class BackUpActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 createTxtBackup(BackUpActivity.this,bigText);
+            }
+        });
+
+        imv_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
             }
         });
 
